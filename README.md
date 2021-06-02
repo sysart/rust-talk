@@ -11,7 +11,6 @@ Material for Sysart internal tech talk held in Finnish on 2021-06-02.
 * [Rustlings](https://github.com/rust-lang/rustlings) contains small exercises to get you used to reading and writing Rust code
 * [Rust and WebAssembly](https://rustwasm.github.io/book/) is an approachable book for getting into writing wasm
 
-
 ## Slides
 
 [Slides](https://github.com/mattikl/rust-talk/blob/master/slides/src/slides.md) are in Finnish.
