@@ -14,6 +14,7 @@ impl RepoClient for GithubClient {
             .get(url)
             .header(ACCEPT, "application/vnd.github.v3+json")
             .header(USER_AGENT, "rust-test")
+            .query(&[("per_page", "100")])
             .send()?;
     
         let response = response.error_for_status()?;

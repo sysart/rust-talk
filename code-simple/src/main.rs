@@ -43,6 +43,7 @@ fn fetch_repos() -> Vec<Repo> {
         .get("https://api.github.com/orgs/sysart/repos")
         .header(ACCEPT, "application/vnd.github.v3+json")
         .header(USER_AGENT, "rust-test")
+        .query(&[("per_page", "100")])
         .send()
         .unwrap();
 
