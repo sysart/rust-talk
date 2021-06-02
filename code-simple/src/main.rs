@@ -40,7 +40,7 @@ fn summarize(repos: Vec<Repo>) {
 fn fetch_repos() -> Vec<Repo> {
     let client = Client::new();
     let response = client
-        .get("http://localhost:10000/api/data/orgs/sysart/repos")
+        .get("https://api.github.com/orgs/sysart/repos")
         .header(ACCEPT, "application/vnd.github.v3+json")
         .header(USER_AGENT, "rust-test")
         .send()
