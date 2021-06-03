@@ -27,7 +27,7 @@ impl fmt::Display for Repo {
 }
 
 /// prints starred repos in decending order
-pub fn summarize(repos: Vec<Repo>) {
+pub fn summarize(repos: &Vec<Repo>) {
     let sorted_repos: BinaryHeap<_> = repos
         .into_iter()
         .filter(|r| r.stargazers_count > 0)

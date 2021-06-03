@@ -13,7 +13,7 @@ fn main() {
     // Simple `let client = GithubClient();` would work as well.
     let client: Box<dyn RepoClient> = Box::new(GithubClient());
     match client.fetch_repos("sysart") {
-        Ok(repos) => summarize(repos),
+        Ok(repos) => summarize(&repos),
         Err(err) => print_error(err),
     };
 }
