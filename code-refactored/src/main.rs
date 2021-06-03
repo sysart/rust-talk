@@ -6,11 +6,11 @@
 use git_client::{RepoClient, GithubClient, CliError, summarize};
 
 fn main() {
-    // this is just showing how we can use GithubClient as a trait object
-    // it would make more sense if we had several clients implementing
-    // the `RepoClient` trait to choose from
+    // This is just showing how we can use GithubClient as a trait object.
+    // It would make more sense if we had several clients implementing
+    // the `RepoClient` trait to choose from.
     //
-    // simple `let client = new GithubClient();` would work as well
+    // Simple `let client = GithubClient();` would work as well.
     let client: Box<dyn RepoClient> = Box::new(GithubClient());
     match client.fetch_repos("sysart") {
         Ok(repos) => summarize(repos),
