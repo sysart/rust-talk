@@ -2,7 +2,7 @@
 
 Esitellään kiinnostavia aiheita tai pohditaan yhdessä ratkaisuja teknisiin ongelmiin
 
-![Tekninen osaaminen](src/osaaminen.png)
+![Tekninen osaaminen](osaaminen.png)
 
 ---
 

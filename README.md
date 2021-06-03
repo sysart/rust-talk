@@ -13,14 +13,13 @@ Material for Sysart internal tech talk held in Finnish on 2021-06-02.
 
 ## Slides
 
-[Slides](https://github.com/mattikl/rust-talk/blob/master/slides/src/slides.md) are in Finnish.
+[Slides](https://github.com/mattikl/rust-talk/blob/master/slides/slides.md) are in Finnish.
 
-Start a spectacle presentation at http://localhost:8080/ with
+Start a spectacle presentation at http://localhost:3000/ with
 
 ```text
 cd slides
-npm install
-npm start
+npx spectacle-cli -s slides.md
 ```
 
 ## Simple example
