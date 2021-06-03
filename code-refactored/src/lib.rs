@@ -1,7 +1,14 @@
+// Implementation if the `git_client` library, which refactors the logic of our simple example
+
 use std::collections::BinaryHeap;
 use std::fmt;
 use serde::Deserialize;
 
+/// Struct fields correspond to field names in Github API
+/// API docs at https://docs.github.com/en/rest/reference/repos
+///
+/// `stargazers_count` is the first field so the derived comparison traits
+/// use it first, keeping the example simple
 #[derive(PartialEq, Eq, PartialOrd, Ord, Deserialize)]
 pub struct Repo {
     pub stargazers_count: u32,
@@ -19,6 +26,7 @@ impl fmt::Display for Repo {
     }
 }
 
+/// prints starred repos in decending order
 pub fn summarize(repos: Vec<Repo>) {
     let sorted_repos: BinaryHeap<_> = repos
         .into_iter()
@@ -29,12 +37,19 @@ pub fn summarize(repos: Vec<Repo>) {
     }
 }
 
+/// custom error type for `RepoClient`
+/// `NotFound` is also an HTTP error, but we want to provide it separately
+/// since it's the most common error
+#[derive(Debug)]
 pub enum CliError {
     Http(reqwest::Error),
     Json(String),
     NotFound,
 }
 
+/// Implementing the `From` trait allows us to return `reqwest::Error` from
+/// method `fetch_repos` and the error gets automatically converted to our
+/// `CliError`
 impl From<reqwest::Error> for CliError {
     fn from(err: reqwest::Error) -> CliError {
         eprintln!("{}", err);
@@ -53,8 +68,20 @@ impl From<reqwest::Error> for CliError {
     }
 }
 
+impl fmt::Display for CliError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            CliError::Http(ref err) => err.fmt(f),
+            CliError::Json(ref err_text) => write!(f, "JSON parse error: {}", err_text),
+            CliError::NotFound => write!(f, "Organization not found"),
+        }
+    }
+}
+
 pub type Result<T> = std::result::Result<T, CliError>;
 
+/// A trait that all repo clients implement
+/// Besides GithubClient, we could implement GitlabClient, BitbucketClient, etc.
 pub trait RepoClient {
     fn fetch_repos(&self, org: &str) -> Result<Vec<Repo>>;
 }
